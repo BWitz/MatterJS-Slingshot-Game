@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Brian's Game!</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./index.css">
+  </head>
+
+  <body class= "body">
+    <div class='main flex'>
+      <h1 class='padding margin title-header'>Brian's Game! It's fun.</h1>
+
+      <br>
+      <div class="container user-input-field">
+      <div class="margin flex user-things name-input-field">
+        <h4 class='center'>Please enter your name!</h4>
+        <form id='user-form'>
+          <input class="input-name" type="name" name="name" placeholder="Name" value="">
+          <input type="submit"value="Submit">
+        </form>
+      </div>
+    </div>
+
+      <br>
+
+      <container class="game-activate">
+        <script src="./matter-js/build/matter.js" type="text/javascript"></script>
+      </container>
+
+
+
+
+      <!-- <div class="margin flex user-things comment-input-field">
+      //   <h4 class='center'>Comments are appreciated :)</h4>
+      //   <form id='comment-form' class="padding margin border-round border-grey">
+      //     <input class=".input-comment" type="comment" name="comment" placeholder="Comment" value="">
+      //     <input type="submit"value="Submit">
+      //   </form>
+      // </div> -->
+
+      <br>
+
+      <div class="margin flex">
+        <h4 class='center recent-players'>Recent players and their comments!</h4>
+
+        <table class='margin users-table' border="1">
+          <thead class='blue'>
+            <tr class='padding'>
+              <th class='padding center'> # </th>
+              <th class='padding center'> Player </th>
+              <th class='padding center'> Comments </th>
+              <th class='padding center'> I want to comment! </th>
+              <th class='padding center'> *click* </th>
+              <th class='padding center'> Farewell :( </th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+  <script src="./index.js"> </script>
+  <!-- <script src="./matter-js/build/matter.js" type="text/javascript"></script> -->
+  <!-- <script src="./matter-js/build/matter.js" type="text/javascript"></script> -->
+  <!-- <script src="./matter-js/src/core/matter.js"> </script> -->
+  <!-- <script src="Users/admin/node_modules/matter-js/build/matter.js"></script>
+  <script src="Users/admin/node_modules/matter-js/build/matter.min.js"></script> -->
+</html>

@@ -1,0 +1,52 @@
+.title-header {
+  font-size: 50px;
+  text-align: center;
+  color: #40FFFA;
+}
+
+.user-things {
+  padding-left: 37%;
+  padding-right: 30%;
+}
+
+.name-input-field {
+  margin-bottom: 10px;
+}
+
+.comment-input-field {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.body {
+  /* background-color: #63F8AE; */
+  background-color: #3399FF;
+}
+
+.users-table {
+  color: white;
+  margin-left: 85px;
+  margin-bottom: 40px;
+}
+
+.delete-btn {
+  size: 5px;
+}
+
+.recent-players {
+  text-align: center;
+}
+
+.game-container {
+  border: 1px solid black;
+  height: 20px;
+  width: 30px;
+  margin-left: 20%;
+}
+
+canvas {
+  position: relative;
+  margin-left: 10%;
+  margin-bottom: 50px;
+  margin-top: 10px;
+}
