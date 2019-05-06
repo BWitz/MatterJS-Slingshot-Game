@@ -110,6 +110,16 @@ buttonListener.addEventListener("click", (event) => {
   }
 })
 
+// Resetting the Game
+  let resetButton = document.querySelector(".game-reset-btn");
+  resetButton.addEventListener("click", () => resetGame())
+
+  function resetGame() {
+      let gameContainer = document.querySelector(".game-activate")
+      gameContainer.innerHTML = ``;
+      renderGame();
+  }
+
 // PHYSICS ENGINE / DATA BELOW
 
 let gameContainer = document.querySelector('.game-activate')
@@ -141,6 +151,8 @@ function renderGame() {
           wireframes: false
       }
   });
+
+  console.log(render);
 
   Render.run(render);
 
