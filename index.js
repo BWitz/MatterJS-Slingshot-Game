@@ -6,19 +6,20 @@ renderGame();
 // Creating our GET / SHOW
 
 function getUsers() {
-  fetch(`http://localhost:3000/api/v1/users`)
+  fetch(`http://localhost:3010/api/v1/users`)
   .then(res => res.json())
   .then(data => showUsers(data))
 }
 
 function showUsers(data) {
-  data.forEach(user => {
+  let sortedData = data.sort(function(a, b){return a.id - b.id});
+  sortedData.forEach(user => {
     let userTable = document.getElementById('table-body');
     let nameEntry = document.createElement("tr");
     let userName = user.name;
     let userComment = user.comment;
     let userId = user.id;
-    nameEntry.innerHTML = `<td>${userId}</td>  <td>${userName}</td> <td class= "this-is-the-comment">${userComment}</td> <td><input class="new-comment-field"></input></td> <td><input class= "comment-btn" data-id="${userId}"  type="submit" value="Submit"></td> <td><input class="delete-btn" data-id="${userId}" type="submit" value="Delete"> </input></td>`
+    nameEntry.innerHTML = `<td>${userId}</td>  <td>${userName}</td> <td class= "comment${userId}">${userComment}</td> <td><input class="new-comment-field"></input></td> <td><input class= "comment-btn" data-id="${userId}"  type="submit" value="Submit"></td> <td><input class="delete-btn" data-id="${userId}" type="submit" value="Delete"> </input></td>`
     userTable.prepend(nameEntry)
   })
 }
@@ -39,7 +40,7 @@ function nameInputHandler(event) {
 }
 
 function postName(name) {
-  fetch(`http://localhost:3000/api/v1/users`, {
+  fetch(`http://localhost:3010/api/v1/users`, {
     method: "POST",
     headers: {
       "Content-Type" : "application/json",
@@ -53,12 +54,19 @@ function postName(name) {
   .then(res => res.json())
   .then(json => {
     newUserForm.reset();
-    showUsers(json);
+    addUserToTable(json);
   })
 }
 
-
-
+function addUserToTable(user) {
+    let userTable = document.getElementById('table-body');
+    let nameEntry = document.createElement("tr");
+    let userName = user.name;
+    let userComment = user.comment;
+    let userId = user.id;
+    nameEntry.innerHTML = `<td>${userId}</td>  <td>${userName}</td> <td class= "this-is-the-comment">${userComment}</td> <td><input class="new-comment-field"></input></td> <td><input class= "comment-btn" data-id="${userId}"  type="submit" value="Submit"></td> <td><input class="delete-btn" data-id="${userId}" type="submit" value="Delete"> </input></td>`
+    userTable.prepend(nameEntry)
+}
 
 // Creating a PATCH request
 let buttonListener = document.querySelector("#table-body");
@@ -75,24 +83,25 @@ function prepareCommentPatch(event) {
     console.log(currentIdInUse);
     console.log(newComment);
     updateComment(currentIdInUse, newComment)
-}
+  }
 }
 
 function updateComment(currentIdInUse, newComment) {
-  fetch(`http://localhost:3000/api/v1/users/${currentIdInUse}`, {
+  fetch(`http://localhost:3010/api/v1/users/${currentIdInUse}`, {
     method: "PATCH",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Accept: "application/json"
     },
     body: JSON.stringify({
-      comment: newComment
+      comment : newComment
     })
   })
     .then(res => res.json())
     .then(json => {
-    let userDataId = document.querySelector(`[data-id="${currentIdInUse}"]`)
+    let allocatedCommentField = document.querySelector(`.comment${json.id}`);
+    allocatedCommentField.innerText = `${newComment}`
   })
-  userDataId.parentNode.querySelector(".this-is-the-comment").innerText = `${newComment}`;
 }
 
 // Creating a Delete fetch
@@ -102,7 +111,7 @@ buttonListener.addEventListener("click", (event) => {
     let currentDOMElement = event.target
     let currentIdInUse = event.target.dataset.id;
     console.log(currentIdInUse);
-    fetch(`http://localhost:3000/api/v1/users/${currentIdInUse}`, {
+    fetch(`http://localhost:3010/api/v1/users/${currentIdInUse}`, {
       method: "DELETE"
     })
     .then(res => res.json())
@@ -120,6 +129,7 @@ buttonListener.addEventListener("click", (event) => {
       renderGame();
   }
 
+
 // PHYSICS ENGINE / DATA BELOW
 
 let gameContainer = document.querySelector('.game-activate')
@@ -136,6 +146,8 @@ function renderGame() {
       World = Matter.World,
       Bodies = Matter.Bodies;
 
+  console.log(Engine);
+
   // create engine
   var engine = Engine.create(),
       world = engine.world;
@@ -151,8 +163,6 @@ function renderGame() {
           wireframes: false
       }
   });
-
-  console.log(render);
 
   Render.run(render);
 
